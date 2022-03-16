@@ -1,14 +1,16 @@
-BINARY_NAME=celeritasApp.exe
+BINARY_NAME=goravelApp.exe
 
 ## build: builds all binaries
 build:
-    @go build -o tmp/${BINARY_NAME} .
-	@echo Celeritas built!
+	@go mod vendor
+	@echo "building Goravel"
+	@go build -o tmp/${BINARY_NAME} .
+	@echo "Goravel built!""
 
-run:
-	@echo Staring Celeritas...
-    @start /min cmd /c tmp\${BINARY_NAME} &
-	@echo Celeritas started!
+run: build
+	@echo Staring Goravel...
+	@.\tmp\${BINARY_NAME} &
+	@echo Goravel started!
 
 clean:
 	@echo Cleaning...
@@ -26,6 +28,6 @@ start: run
 stop:
 	@echo "Starting the front end..."
 	@taskkill /IM ${BINARY_NAME} /F
-	@echo Stopped Celeritas
+	@echo Stopped Goravel
 
 restart: stop start
